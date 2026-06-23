@@ -1,6 +1,7 @@
 package jp.co.sss.lms.ct.f02_faq;
 
 import static jp.co.sss.lms.ct.util.WebDriverUtils.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 /**
  * 結合テスト よくある質問機能
@@ -36,6 +39,13 @@ public class Case04 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
+		//ログイン画面の検証
+		webDriver.get("http://localhost:8080/lms");
+		WebElement tagElement = webDriver.findElement(By.tagName("h2"));
+		assertEquals("ログイン", tagElement.getText());
+		//スクリーンショットの撮影
+		getEvidence(new Object() {
+		});
 	}
 
 	@Test
@@ -43,6 +53,24 @@ public class Case04 {
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
+		//トップページにアクセス
+		webDriver.get("http://localhost:8080/lms");
+
+		//登録済みの会員情報を入力
+		webDriver.findElement(By.name("loginId")).sendKeys("StudentAA01");
+		webDriver.findElement(By.name("password")).sendKeys("Anon0316");
+
+		//ログインボタンをクリック
+		webDriver.findElement(By.className("btn-primary")).click();
+
+		//遷移後の画面に書かれている内容を検証
+		WebElement welcomeMsg = webDriver.findElement(By.tagName("h2"));
+		//テキストが含まれているかチェック
+		assertTrue(welcomeMsg.getText().contains("DEMOコース"));
+
+		//スクリーンショットの撮影
+		getEvidence(new Object() {
+		});
 	}
 
 	@Test
@@ -50,6 +78,15 @@ public class Case04 {
 	@DisplayName("テスト03 上部メニューの「ヘルプ」リンクからヘルプ画面に遷移")
 	void test03() {
 		// TODO ここに追加
+		//ヘルプページにアクセス
+		webDriver.get("http://localhost:8080/lms/help");
+		//遷移後の画面に書かれている内容を検証
+		WebElement topMsg = webDriver.findElement(By.tagName("h2"));
+		//テキストが含まれているかチェック
+		assertTrue(topMsg.getText().contains("ヘルプ"));
+		//スクリーンショットの撮影
+		getEvidence(new Object() {
+		});
 	}
 
 	@Test
@@ -57,6 +94,17 @@ public class Case04 {
 	@DisplayName("テスト04 「よくある質問」リンクからよくある質問画面を別タブに開く")
 	void test04() {
 		// TODO ここに追加
+		//トップページにアクセス
+		webDriver.get("http://localhost:8080/lms/faq");
+		//遷移後の画面に書かれている内容を検証
+		//テキストが含まれているかチェック
+		WebElement topMsg = webDriver.findElement(By.tagName("h2"));
+		System.out.println(topMsg.getText());
+		assertEquals("よくある質問", topMsg.getText());
+
+		//スクリーンショットの撮影
+		getEvidence(new Object() {
+		});
 	}
 
 }
