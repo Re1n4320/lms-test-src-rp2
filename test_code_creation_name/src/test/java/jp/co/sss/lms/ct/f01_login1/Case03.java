@@ -1,6 +1,7 @@
 package jp.co.sss.lms.ct.f01_login1;
 
 import static jp.co.sss.lms.ct.util.WebDriverUtils.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -9,6 +10,9 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * 結合テスト ログイン機能①
@@ -18,6 +22,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 @TestMethodOrder(OrderAnnotation.class)
 @DisplayName("ケース03 受講生 ログイン 正常系")
 public class Case03 {
+	private static WebDriver driver;
 
 	/** 前処理 */
 	@BeforeAll
@@ -36,6 +41,14 @@ public class Case03 {
 	@DisplayName("テスト01 トップページURLでアクセス")
 	void test01() {
 		// TODO ここに追加
+		//ログイン画面の検証
+		webDriver.get("http://localhost:8080/lms");
+		WebElement tagElement = webDriver.findElement(By.tagName("h2"));
+		assertEquals("ログイン", tagElement.getText());
+
+		//スクリーンショットの撮影
+		getEvidence(new Object() {
+		});
 	}
 
 	@Test
@@ -43,6 +56,26 @@ public class Case03 {
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
+		//トップページにアクセス
+		webDriver.get("http://localhost:8080/lms");
+
+		//登録済みの会員情報を入力
+		webDriver.findElement(By.name("loginId")).sendKeys("StudentAA01");
+		webDriver.findElement(By.name("password")).sendKeys("Anon0316");
+
+		//ログインボタンをクリック
+		webDriver.findElement(By.className("btn-primary")).click();
+
+		//遷移後の画面に書かれている内容を検証
+		WebElement welcomeMsg = webDriver.findElement(By.tagName("h2"));
+		//テキストが含まれているかチェック
+		assertTrue(welcomeMsg.getText().contains("DEMOコース"));
+		//タイトルを検証
+		assertEquals("コース詳細 | LMS", webDriver.getTitle());
+
+		//スクリーンショットの撮影
+		getEvidence(new Object() {
+		});
 	}
 
 }
