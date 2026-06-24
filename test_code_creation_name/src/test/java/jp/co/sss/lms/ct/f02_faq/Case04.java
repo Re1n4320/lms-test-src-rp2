@@ -90,6 +90,8 @@ public class Case04 {
 		webDriver.findElement(By.className("dropdown-toggle")).click();
 		//「ヘルプ」のリンクをクリック
 		webDriver.findElement(By.linkText("ヘルプ")).click();
+		//タイトルを検証
+		assertEquals("ヘルプ | LMS", webDriver.getTitle());
 		//テキストが含まれているかの確認
 		WebElement topMsg = webDriver.findElement(By.tagName("h2"));
 		assertTrue(topMsg.getText().contains("ヘルプ"));
