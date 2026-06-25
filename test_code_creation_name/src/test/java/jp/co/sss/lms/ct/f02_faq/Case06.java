@@ -180,7 +180,7 @@ public class Case06 {
 		//検索結果が2つであることの検証
 		assertEquals(2, elements.size());
 
-		// 実際のテキストに、指定した文字列が含まれているか、後方一致で確認
+		//検索結果に、指定した文字列が含まれているか、後方一致で確認
 		String actualText = elements.get(0).getText();
 		assertTrue(actualText.endsWith("協議という形を取らせて頂きます。 弊社営業担当までご相談下さい。"));
 
