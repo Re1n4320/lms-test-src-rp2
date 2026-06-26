@@ -55,8 +55,6 @@ public class Case04 {
 	@DisplayName("テスト02 初回ログイン済みの受講生ユーザーでログイン")
 	void test02() {
 		// TODO ここに追加
-		//トップページにアクセス
-		webDriver.get("http://localhost:8080/lms");
 
 		//登録済みの会員情報を入力
 		webDriver.findElement(By.name("loginId")).sendKeys("StudentAA01");
@@ -83,8 +81,6 @@ public class Case04 {
 	@DisplayName("テスト03 上部メニューの「ヘルプ」リンクからヘルプ画面に遷移")
 	void test03() {
 		// TODO ここに追加
-		//詳細ページにアクセス
-		webDriver.get("http://localhost:8080/lms/course/detail");
 
 		//「機能」ボタンをクリック
 		webDriver.findElement(By.className("dropdown-toggle")).click();
@@ -106,8 +102,6 @@ public class Case04 {
 	void test04() {
 
 		// TODO ここに追加
-		//ヘルプページにアクセス
-		webDriver.get("http://localhost:8080/lms/help");
 
 		// 現在開いている元のタブの識別子を覚えておく
 		String originalWindow = webDriver.getWindowHandle();

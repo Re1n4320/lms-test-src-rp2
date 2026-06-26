@@ -70,9 +70,14 @@ public class Case02 {
 		//ログインボタンをクリック
 		webDriver.findElement(By.className("btn-primary")).click();
 
-		//メッセージの内容が正しいかの確認
-		WebElement errorMsg = webDriver.findElement(By.className("help-inline"));
-		assertEquals("* ログインに失敗しました。", errorMsg.getText());
+		// 1. 要素（WebElement）を見つける
+		WebElement element = driver.findElement(By.className("help-inline"));
+
+		// 2. 要素からテキストを取り出す（例: "こんにちは、ゲストさん！"）
+		String actualText = element.getText();
+
+		// 3. テキストに特定の文字（部分一致）が含まれているか検証する
+		assertTrue(actualText.contains("キャンセル"));
 
 		//スクリーンショットの撮影
 		getEvidence(new Object() {
